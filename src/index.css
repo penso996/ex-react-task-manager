@@ -33,7 +33,3 @@ header a {
 header a:hover {
   opacity: 50%;
 }
-
-header a:active {
-  text-decoration: underline;
-}
