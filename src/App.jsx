@@ -1,6 +1,9 @@
 // Import hooks from React
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Import context
+import { GlobalProvider } from "./context/GlobalContext";
+
 // Import pages_layouts
 import DefaultLayout from "./pages_layouts/DefaultLayout";
 
@@ -12,14 +15,16 @@ function App() {
 
   // RENDER
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<DefaultLayout />}>
-          <Route path="/" element={<TaskList />} />
-          <Route path="/add-task" element={< AddTask />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <GlobalProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<DefaultLayout />}>
+            <Route path="/" element={<TaskList />} />
+            <Route path="/add-task" element={< AddTask />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </GlobalProvider>
   )
 }
 
