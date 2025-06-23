@@ -1,4 +1,4 @@
-function AddTask() {
+export default function AddTask() {
 
     // RENDER
     return (
@@ -7,5 +7,3 @@ function AddTask() {
         </>
     )
 }
-
-export default AddTask

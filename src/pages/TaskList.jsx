@@ -1,4 +1,4 @@
-function TaskList() {
+export default function TaskList() {
 
     // RENDER
     return (
@@ -7,5 +7,3 @@ function TaskList() {
         </>
     )
 }
-
-export default TaskList
