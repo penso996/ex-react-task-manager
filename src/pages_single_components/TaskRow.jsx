@@ -1,4 +1,7 @@
-export default function TaskRow({ task }) {
+// Import hooks from React
+import { memo } from "react";
+
+const TaskRow = memo(({ task }) => {
 
     // RENDER
     return (
@@ -21,4 +24,6 @@ export default function TaskRow({ task }) {
             <td>{new Date(task.createdAt).toLocaleDateString("it-IT")}</td>
         </tr>
     )
-}
+})
+
+export default TaskRow;
