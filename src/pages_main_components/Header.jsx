@@ -7,9 +7,18 @@ export default function Header() {
     return (
         <header>
             <nav>
-                <NavLink to="/">Task List</NavLink>
-                <NavLink to="/add-task">Add Task</NavLink>
+                {/* task list*/}
+                <NavLink
+                    to="/" end
+                    style={({ isActive }) => ({ textDecoration: isActive ? "underline" : "none" })}
+                >TASK LIST</NavLink>
+
+                {/* add task */}
+                <NavLink
+                    to="/add-task"
+                    style={({ isActive }) => ({ textDecoration: isActive ? "underline" : "none" })}
+                >ADD TASK</NavLink>
             </nav>
-        </header>
+        </header >
     )
 }
