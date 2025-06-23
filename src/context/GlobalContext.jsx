@@ -1,8 +1,11 @@
 // Import hooks from React
 import { createContext, useEffect, useState } from "react";
 
+
+// export GlobalContext
 export const GlobalContext = createContext();
 
+// export GlobalProvider
 export function GlobalProvider({ children }) {
 
     const [tasks, setTasks] = useState([])
