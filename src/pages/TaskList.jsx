@@ -21,12 +21,11 @@ export default function TaskList() {
                 {/* table head */}
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Stato</th>
-                        <th>Data di Creazione</th>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Creation Date</th>
                     </tr>
                 </thead>
-
                 {/* table body */}
                 <tbody>
                     {tasks.map(task => (
