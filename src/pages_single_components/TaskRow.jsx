@@ -1,6 +1,7 @@
 // Import hooks from React
 import { memo } from "react";
 
+
 export const TaskRow = memo(({ task }) => {
 
     // RENDER

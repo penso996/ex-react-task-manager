@@ -7,6 +7,7 @@ import { GlobalContext } from "../context/GlobalContext";
 // Import page_single_component
 import TaskRow from "../pages_single_components/TaskRow";
 
+
 export default function TaskList() {
 
     const { tasks } = useContext(GlobalContext);
