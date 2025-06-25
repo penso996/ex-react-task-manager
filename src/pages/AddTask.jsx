@@ -1,8 +1,12 @@
 // Import hooks from React
-import { useMemo, useRef, useState } from "react"
+import { useMemo, useRef, useState, useContext } from "react";
+
+// Import context
+import { GlobalContext } from "../context/GlobalContext";
 
 
 export default function AddTask() {
+    const { addTask } = useContext(GlobalContext);
 
     const symbols = "!@#$%^&*()-_=+[]£{}|;:'\",.<>?/`~";
 
@@ -18,7 +22,7 @@ export default function AddTask() {
         return "";
     }, [taskTitle])
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault();
         if (taskTitleError)
             return;
@@ -27,7 +31,16 @@ export default function AddTask() {
             description: descriptionRef.current.value,
             status: statusRef.current.value
         }
-        console.log(newTask);
+
+        try {
+            await addTask(newTask);
+            alert("Task added");
+            setTaskTitle("");
+            descriptionRef.current.value = "";
+            statusRef.current.value = "";
+        } catch (error) {
+            alert(error.message);
+        }
     }
 
     // RENDER
