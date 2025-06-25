@@ -16,6 +16,17 @@ a {
 }
 
 /* pages */
+/* AddTask.jsx */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+}
 
 /* pages_main_components */
 /* Header.jsx */
