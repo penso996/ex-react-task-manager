@@ -1,12 +1,13 @@
 // Import hooks from React
 import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
 
 export default function TaskDetail() {
 
     const { id } = useParams();
-    const { tasks } = useContext(GlobalContext);
+    const navigate = useNavigate();
+    const { tasks, removeTask } = useContext(GlobalContext);
 
     const task = tasks.find(task => task.id === parseInt(id));
 
@@ -17,8 +18,16 @@ export default function TaskDetail() {
             <h1>404 TASK NOT FOUND</h1>
         )
     }
-    const handleDelete = () => {
-        console.log("Delete task ", task.id)
+
+    const handleDelete = async () => {
+        try {
+            await removeTask(task.id);
+            alert("Task Deleted");
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+        }
     }
 
     // RENDER

@@ -13,6 +13,7 @@ export default function useTasks() {
             .catch(error => console.error(error));
     }, []);
 
+    // add task
     const addTask = async newTask => {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
             method: "POST",
@@ -26,14 +27,24 @@ export default function useTasks() {
         setTasks(prev => [...prev, task])
     }
 
-    const removeTask = () => {
+    // remove task
+    const removeTask = async taskId => {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks/${taskId}`, {
+            method: "DELETE"
+        });
+        const { success, message } = await response.json();
 
+        if (!success) throw new Error(message);
+
+        setTasks(prev => prev.filter(task => task.id !== taskId))
     }
 
+    // update task
     const updateTask = () => {
 
     }
 
+    // return
     return { tasks, addTask, removeTask, updateTask }
 
 }
