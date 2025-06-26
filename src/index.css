@@ -13,6 +13,11 @@
 a {
   text-decoration: none;
   color: black;
+  transition: 0.3s ease;
+}
+
+a:hover {
+  opacity: 50%;
 }
 
 /* pages */
@@ -42,11 +47,6 @@ header {
 header a {
   margin: 0 50px;
   font-size: 20px;
-  transition: 0.3s ease;
-}
-
-header a:hover {
-  opacity: 50%;
 }
 
 /* page_single_components */
