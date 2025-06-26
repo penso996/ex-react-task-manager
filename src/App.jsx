@@ -10,6 +10,7 @@ import DefaultLayout from "./pages_layouts/DefaultLayout";
 // Import pages
 import AddTask from "./pages/AddTask";
 import TaskList from "./pages/TaskList";
+import TaskDetail from "./pages/TaskDetail";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route element={<DefaultLayout />}>
             <Route path="/" element={<TaskList />} />
             <Route path="/add-task" element={< AddTask />} />
+            <Route path="/task/:id" element={<TaskDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
