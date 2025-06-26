@@ -1,5 +1,6 @@
 // Import hooks from React
 import { memo } from "react";
+import { Link } from "react-router-dom";
 
 
 export const TaskRow = memo(({ task }) => {
@@ -7,7 +8,7 @@ export const TaskRow = memo(({ task }) => {
     // RENDER
     return (
         <tr>
-            <td>{task.title}</td>
+            <td><Link to={`/task/${task.id}`}>{task.title}</Link></td>
             <td
                 style={{
                     color:
