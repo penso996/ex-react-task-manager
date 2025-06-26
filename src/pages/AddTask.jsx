@@ -51,7 +51,7 @@ export default function AddTask() {
             <form onSubmit={handleSubmit}>
                 {/* task title */}
                 <label>
-                    Task title:
+                    Task Title:
                     <input
                         type="text"
                         value={taskTitle}

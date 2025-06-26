@@ -21,9 +21,9 @@ export default function TaskList() {
                 {/* table head */}
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Title</th>
                         <th>Status</th>
-                        <th>Creation Date</th>
+                        <th>Creation</th>
                     </tr>
                 </thead>
                 {/* table body */}
