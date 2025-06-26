@@ -1,7 +1,10 @@
 // Import hooks from React
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../context/GlobalContext";
+
+// Import page_single_components
+import Modal from "../pages_single_components/Modal";
 
 export default function TaskDetail() {
 
@@ -10,6 +13,8 @@ export default function TaskDetail() {
     const { tasks, removeTask } = useContext(GlobalContext);
 
     const task = tasks.find(task => task.id === parseInt(id));
+
+    const [showModal, setShowModal] = useState(false);
 
     if (!task) {
 
@@ -65,7 +70,15 @@ export default function TaskDetail() {
                             {task.status}
                         </td>
                         <td>{new Date(task.createdAt).toLocaleDateString("it-IT")}</td>
-                        <td><button onClick={handleDelete}>Delete</button></td>
+                        <td><button onClick={setShowModal}>Delete</button></td>
+                        <Modal
+                            title="Delete"
+                            content={<p>Are you sure to delete this task?</p>}
+                            show={showModal}
+                            onClose={() => setShowModal(false)}
+                            onConfirm={handleDelete}
+                            confirmText="Delete"
+                        />
                     </tr>
                 </tbody>
             </table>
