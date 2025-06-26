@@ -17,6 +17,9 @@ export default function TaskDetail() {
             <h1>404 TASK NOT FOUND</h1>
         )
     }
+    const handleDelete = () => {
+        console.log("Delete task ", task.id)
+    }
 
     // RENDER
     return (
@@ -53,6 +56,7 @@ export default function TaskDetail() {
                             {task.status}
                         </td>
                         <td>{new Date(task.createdAt).toLocaleDateString("it-IT")}</td>
+                        <td><button onClick={handleDelete}>Delete</button></td>
                     </tr>
                 </tbody>
             </table>
