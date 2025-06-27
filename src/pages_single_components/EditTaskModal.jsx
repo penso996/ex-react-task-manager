@@ -7,15 +7,22 @@ import Modal from "./Modal";
 export default function EditTaskModal(show, onClose, task, onSave) {
 
     const [editedTask, setEditedTask] = useState(task);
+    const editFormRef = useRef();
+
     const changeEditedTask = (key, event) => {
         setEditedTask(prev => ({ ...prev, [key]: event.target.value }));
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        onSave(editedTask);
     }
 
     return (
         < Modal
             title="Modify Task"
             content={
-                <form>
+                <form ref={editFormRef} onSubmit={handleSubmit}>
                     {/* task title */}
                     <label>
                         Task Title:
@@ -52,6 +59,9 @@ export default function EditTaskModal(show, onClose, task, onSave) {
 
             }
             confirmText="Save"
+            show={show}
+            onClose={onClose}
+            onConfirm={() => editFormRef.current.requestSubmit}
         />
     )
 }
