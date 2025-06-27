@@ -1,10 +1,10 @@
 // Import hooks from React
 import { useState, useRef } from "react";
 
-// Import modal
+// Import page_single_components
 import Modal from "./Modal";
 
-export default function EditTaskModal(show, onClose, task, onSave) {
+export default function EditTaskModal({ show, onClose, task, onSave }) {
 
     const [editedTask, setEditedTask] = useState(task);
     const editFormRef = useRef();
@@ -46,22 +46,22 @@ export default function EditTaskModal(show, onClose, task, onSave) {
                         <select
                             value={editedTask.status}
                             onChange={e => changeEditedTask("status", e)}
-                        />
-                        {["To Do", "Doing", "Done"].map((value, index) => (
-                            <option
-                                key={index}
-                                value={value}>
-                                {value}
-                            </option>
-                        ))}
+                        >
+                            {["To do", "Doing", "Done"].map((value, index) => (
+                                <option key={index} value={value}>
+                                    {value}
+                                </option>
+                            ))}
+                        </select>
                     </label>
+
                 </form >
 
             }
             confirmText="Save"
             show={show}
             onClose={onClose}
-            onConfirm={() => editFormRef.current.requestSubmit}
+            onConfirm={() => editFormRef.current.requestSubmit()}
         />
     )
 }

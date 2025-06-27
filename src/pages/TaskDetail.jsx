@@ -5,16 +5,18 @@ import { GlobalContext } from "../context/GlobalContext";
 
 // Import page_single_components
 import Modal from "../pages_single_components/Modal";
+import EditTaskModal from "../pages_single_components/EditTaskModal";
 
 export default function TaskDetail() {
 
     const { id } = useParams();
     const navigate = useNavigate();
-    const { tasks, removeTask } = useContext(GlobalContext);
+    const { tasks, removeTask, updateTask } = useContext(GlobalContext);
 
     const task = tasks.find(task => task.id === parseInt(id));
 
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setEditModal] = useState(false);
 
     if (!task) {
 
@@ -29,6 +31,16 @@ export default function TaskDetail() {
             await removeTask(task.id);
             alert("Task Deleted");
             navigate("/");
+        } catch (error) {
+            console.error(error);
+            alert(error.message);
+        }
+    }
+
+    const handleUpdate = async updatedTask => {
+        try {
+            await updateTask(updatedTask);
+            setEditModal(false);
         } catch (error) {
             console.error(error);
             alert(error.message);
@@ -78,6 +90,13 @@ export default function TaskDetail() {
                             onClose={() => setShowModal(false)}
                             onConfirm={handleDelete}
                             confirmText="Delete"
+                        />
+                        <td><button onClick={setEditModal}>Modify</button></td>
+                        <EditTaskModal
+                            task={task}
+                            show={showEditModal}
+                            onClose={() => setEditModal(false)}
+                            onSave={handleUpdate}
                         />
                     </tr>
                 </tbody>
