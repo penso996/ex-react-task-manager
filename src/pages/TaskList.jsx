@@ -1,5 +1,5 @@
 // Import hooks from React
-import { useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useState } from "react";
 
 // Import context
 import { GlobalContext } from "../context/GlobalContext";
@@ -7,12 +7,26 @@ import { GlobalContext } from "../context/GlobalContext";
 // Import page_single_component
 import TaskRow from "../pages_single_components/TaskRow";
 
+// Debounce function
+function debounce(callback, delay) {
+    let timer;
+    return (value) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            callback(value);
+        }, delay)
+    }
+}
 
 export default function TaskList() {
 
     const { tasks } = useContext(GlobalContext);
 
     const [searchQuery, setSearchQuery] = useState("");
+    const debouncedSetSearchQuery = useCallback(
+        debounce(setSearchQuery, 500)
+        , []);
+
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortOrder, setSortOrder] = useState(1);
 
@@ -55,8 +69,7 @@ export default function TaskList() {
             {/* input */}
             <input
                 type="text"
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
+                onChange={e => debouncedSetSearchQuery(e.target.value)}
             />
 
             <table>
