@@ -27,23 +27,25 @@ export default function TaskList() {
         }
     }
 
-    const sortedTask = useMemo(() => {
-        return [...tasks].sort((a, b) => {
-            let comparison;
-            if (sortBy === "title") {
-                comparison = a.title.localeCompare(b.title)
-            } else if (sortBy === "status") {
-                const statusOption = ["To do", "Doing", "Done"];
-                comparison = statusOption.indexOf(a.status) - statusOption.indexOf(b.status);
-            } else if (sortBy === "createdAt") {
-                const dateA = new Date(a.createdAt).getTime();
-                const dateB = new Date(b.createdAt).getTime();
-                comparison = dateA - dateB;
-            }
+    const filteredSortedTask = useMemo(() => {
+        return [...tasks]
+            .filter(t => t.title.toLowerCase().includes(searchQuery.toLowerCase()))
+            .sort((a, b) => {
+                let comparison;
+                if (sortBy === "title") {
+                    comparison = a.title.localeCompare(b.title)
+                } else if (sortBy === "status") {
+                    const statusOption = ["To do", "Doing", "Done"];
+                    comparison = statusOption.indexOf(a.status) - statusOption.indexOf(b.status);
+                } else if (sortBy === "createdAt") {
+                    const dateA = new Date(a.createdAt).getTime();
+                    const dateB = new Date(b.createdAt).getTime();
+                    comparison = dateA - dateB;
+                }
 
-            return comparison * sortOrder;
-        })
-    }, [tasks, sortBy, sortOrder])
+                return comparison * sortOrder;
+            })
+    }, [tasks, sortBy, sortOrder, searchQuery])
 
     // RENDER
     return (
@@ -74,7 +76,7 @@ export default function TaskList() {
                 </thead>
                 {/* table body */}
                 <tbody>
-                    {sortedTask.map(task => (
+                    {filteredSortedTask.map(task => (
                         <TaskRow key={task.id} task={task} />
                     ))}
                 </tbody>
