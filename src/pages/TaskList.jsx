@@ -12,6 +12,7 @@ export default function TaskList() {
 
     const { tasks } = useContext(GlobalContext);
 
+    const [searchQuery, setSearchQuery] = useState("");
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortOrder, setSortOrder] = useState(1);
 
@@ -48,6 +49,13 @@ export default function TaskList() {
     return (
         <>
             <h1>TASK LIST</h1>
+
+            {/* input */}
+            <input
+                type="text"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+            />
 
             <table>
                 {/* table head */}
